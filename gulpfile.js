@@ -31,7 +31,7 @@ gulp.task('html', function() {
 gulp.task('watch', ['sass', 'images', "javascript", "html"], function() {
     gulp.watch(['src/styles/**/*.scss'], ['sass']);
     gulp.watch(['src/images/**/*'], ['images']);
-    gulp.watch(["src/javascript/*.js"], ["javascript"]);
+    gulp.watch(["src/js/*.js"], ["javascript"]);
     gulp.watch(["src/*.html"], ["html"]);
 });
 
