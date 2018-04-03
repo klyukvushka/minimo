@@ -564,8 +564,13 @@ body {
 .news-article__image {
   width: 420px;
   height: 280px; }
+  @media screen and (max-width: 991px) {
+    .news-article__image {
+      width: 100%; } }
   @media screen and (max-width: 767px) {
     .news-article__image {
+      width: 420px;
+      height: 280px;
       display: block;
       margin: 0 auto; } }
   @media screen and (max-width: 480px) {

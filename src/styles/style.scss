@@ -205,7 +205,12 @@ body {
 	&__image{
 		width: 420px;
 		height: 280px;
+		@include tablet-landscape {
+			width: 100%;
+		}
 		@include tablet-portrait {
+			width: 420px;
+			height: 280px;
 			display: block;
 			margin: $margin;
 		}
