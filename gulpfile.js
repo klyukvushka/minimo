@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var csso = require("gulp-csso");
 var imagemin = require('gulp-imagemin');
 var concat = require('gulp-concat');
+var uglify = require("gulp-uglify");
 var htmlmin = require('gulp-htmlmin');
 var browserSync = require('browser-sync').create();
 
@@ -31,6 +32,7 @@ gulp.task("images", function (){
 gulp.task('javascript', function() {  
   return gulp.src("src/js/*.js")
     .pipe(concat('build.js'))
+    .pipe(uglify())
     .pipe(gulp.dest('dist/javascript'))
 });
 
