@@ -6,6 +6,9 @@ var concat = require('gulp-concat');
 var uglify = require("gulp-uglify");
 var htmlmin = require('gulp-htmlmin');
 var browserSync = require('browser-sync').create();
+var pump = require("pump");
+var autoprefixer = require('gulp-autoprefixer');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('browser-sync', function() {
   browserSync.init({
@@ -17,11 +20,17 @@ gulp.task('browser-sync', function() {
 });
  
 gulp.task('sass', function () {
-  return gulp.src('src/styles/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(csso())
-    .pipe(gulp.dest('dist/css'));
-});
+    return gulp.src('src/styles/**/*.scss')
+      .pipe(sourcemaps.init())
+      .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer({
+          browsers: ['last 2 versions'],
+          cascade: false
+      }))
+      .pipe(csso())
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest('dist/css'));
+  });
 
 gulp.task("images", function (){
 	gulp.src('src/images/**/*')
@@ -29,11 +38,15 @@ gulp.task("images", function (){
 	.pipe(gulp.dest('dist/images'))
 });
 
-gulp.task('javascript', function() {  
-  return gulp.src("src/js/*.js")
-    .pipe(concat('build.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/javascript'))
+gulp.task('javascript', function(cb) {  
+    pump([
+        gulp.src("src/js/*.js"),
+        concat('build.js'),
+        uglify(),
+        gulp.dest('dist/javascript')
+    ],
+    cb
+    );
 });
 
 gulp.task('html', function() {
