@@ -2,7 +2,7 @@
 @import "normalize";
 @import "mixins";
 @import "lightbox";
-
+@import "../../node_modules/bootstrap/dist/css/bootstrap.min";
 html {
 	box-sizing: border-box;
 	-ms-overflow-style: scrollbar;
@@ -30,7 +30,10 @@ body {
 	font-size: 14px;
 	color: $cathegory-color;
 }
-
+a:hover {
+	text-decoration: none;
+	color: #333333;
+}
 .header{
 	&__container{
 		@extend .container;
@@ -83,7 +86,10 @@ body {
 			font-size: 12px;
 			font-weight: normal;
 		}
-		
+		&:hover{
+			text-decoration: none;
+			color: #333333;
+		}
 	}
 	@include tablet-landscape {
 		width: 100%;
